@@ -12,7 +12,8 @@ function Card(bck, frnt, pos)
     this.position = pos;
     
     this.reveal = function(){
-        this.back = this.front;
+        //this.back = this.front;
+        document.getElementById('myimgstyle-' + (this.position)).firstElementChild.src = this.front;
     }
 }
 
@@ -64,12 +65,12 @@ Game.prototype.Start = function(){
                 }            
         }
     
-    document.getElementById("Game").innerHTML = ''; 
+   /* document.getElementById("Game").innerHTML = ''; 
     for(i = 0; i < CardArray.length; i++)
         {
             document.getElementById("Game").innerHTML = document.getElementById("Game").innerHTML + 
                 ("<div class=\"myjsclass\" id=\"myimgstyle-" + CardArray[i].position + "\"><img src=\"" + CardArray[i].front + "\" alt=\"Card\" class=\"myimgstyle w3-center w3-animate-opacity\"  id=\"myimgstyle-" + CardArray[i].position + "\"></div>")
-        }
+        }*/
 };
 
 var gamez = new Game();  
@@ -97,20 +98,20 @@ window.onclick = function ()
         gamez.Start(); 
 	}
     
-    document.getElementById('Game').onclick = function()
-	{	    
-       
-	}   
+  if(document.getElementById(e.id).className === 'myjsclass')
+	{		
+        index = e.id.substring(e.id.indexOf('myimgstyle-') + 'myimgstyle-'.length,e.id.length);
+        CardArray[index-1].reveal();
+        lastclicked = index-1;
+	}      
     
+     
     
-   
-        
-    
-     $('.myjsclass').click(function()
+}
+/*
+$('.myjsclass').click(function()
     {
         var clickedID = this.id;
         alert('The id of the element you clicked: ' + this.id);
     });
-    
-}
-
+*/
