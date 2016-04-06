@@ -36,7 +36,7 @@ Game.prototype.Reset = function(){
     for(i = 0; i < CardArray.length; i++)
         {
             document.getElementById("Game").innerHTML = document.getElementById("Game").innerHTML + 
-                ("<div><img src=\"" + CardArray[i].back + "\" alt=\"Card\" class=\"myimgstyle   w3-center w3-animate-opacity\"  id=\"myimgstyle-" + CardArray[i].position + "\"></div>")
+                ("<div class=\"myjsclass\" id=\"myimgstyle-" + CardArray[i].position + "\"><img src=\"" + CardArray[i].back + "\" alt=\"Card\" class=\"myimgstyle   w3-center w3-animate-opacity\"  id=\"myimgstyle-" + CardArray[i].position + "\"></div>")
         }
 }
     
@@ -68,33 +68,49 @@ Game.prototype.Start = function(){
     for(i = 0; i < CardArray.length; i++)
         {
             document.getElementById("Game").innerHTML = document.getElementById("Game").innerHTML + 
-                ("<div><img src=\"" + CardArray[i].front + "\" alt=\"Card\" class=\"myimgstyle w3-center w3-animate-opacity\"  id=\"myimgstyle-" + CardArray[i].position + "\"></div>")
+                ("<div class=\"myjsclass\" id=\"myimgstyle-" + CardArray[i].position + "\"><img src=\"" + CardArray[i].front + "\" alt=\"Card\" class=\"myimgstyle w3-center w3-animate-opacity\"  id=\"myimgstyle-" + CardArray[i].position + "\"></div>")
         }
 };
 
+var gamez = new Game();  
+    
+window.onload = function()
+{
+    gamez.Init();
+}
+
 //-- EVENT HANDLERS
-window.onload = function () 
+window.onclick = function () 
 {	
-    var gamez = new Game();    
-        gamez.Init();
-	
+    var e = window.event;
+    e = e.target || e.srcElement;
+    
     document.getElementById('reset').onclick = function()
 	{	 
         gamez.Reset();
         gamez.Init();
 	}
     
-    document.getElementById('start').onclick = function()
+  if(e.id === 'start')
 	{		
         gamez.Reset();
         gamez.Start(); 
 	}
     
     document.getElementById('Game').onclick = function()
-	{		
-        gamez.Reset();
-        gamez.Start(); 
-	}
+	{	    
+       
+	}   
+    
+    
+   
+        
+    
+     $('.myjsclass').click(function()
+    {
+        var clickedID = this.id;
+        alert('The id of the element you clicked: ' + this.id);
+    });
+    
 }
-
 
