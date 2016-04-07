@@ -127,6 +127,19 @@ var currntclicked = -1;
 var FirstMove;
 var clicks = 0;
 var revealed = 0;
+var timeOut = -1;
+
+var audio = new Audio('sounds/startgame.mp3');
+var flip = new Audio('sounds/flipcard.mp3');
+var gamewin = new Audio('sounds/win.mp3');
+
+function doReset()
+{
+    CardArray[currntclicked].reset();
+    CardArray[lastclicked].reset();
+    timeOut = -1; 
+}
+
 
 window.onload = function()
 {
@@ -153,64 +166,55 @@ window.onclick = function ()
         gamez.Start(); 
         timer.doUpdateTimer();
         gamez.updatemoves();
-	}
+        audio.play();
+	}    
+    
     
   if(document.getElementById(e.id).className === 'myjsclass')
-	{	               
-       
+	{   
         index = e.id.substring(e.id.indexOf('myimgstyle-') + 'myimgstyle-'.length,e.id.length);
         
         if(revealed < (CardArray.length / 2))
            {           
                 if(document.getElementById(e.id).firstElementChild.src.indexOf("images/default.jpg") > -1)
-                {
+                {   
+                    if(timeOut != -1) 
+                    {
+                        for(x = timeOut; x > 0; x--)window.clearTimeout(x);
+                        doReset();             
+                    }
                     CardArray[index-1].show();
                     gamez.updatemoves();
                     lastclicked = currntclicked;
                     currntclicked = index-1;
                     if(lastclicked == -1)lastclicked = currntclicked;
                     clicks++;
-
-                    window.setTimeout(function() 
+                    
+                    if(clicks == 2)
                     {
-                        if(clicks == 2)
-                        {
                             clicks = 0;
                             if(CardArray[currntclicked].front != CardArray[lastclicked].front)
                                 {
-                                    CardArray[currntclicked].reset();
-                                    CardArray[lastclicked].reset();
+                                    timeOut = window.setTimeout(function() 
+                                    {
+                                        doReset();
+                                    }, 300);
                                 }
                             else
                             {
                                 revealed++;
+                                flip.play();                                
                             }
-                        }
-                    }, 1000);
+                    }
+                    
                 }
           }
-    else
+        if(revealed == 6)
         {
-            alert("game won!!!!");
+           gamewin.play();            
+           document.getElementById("win").innerHTML = "<center><img src=\"images/winner.png\"> <br>CONGRATULATIONS!!! You won the game with " + gamez.moves + " moves in " + document.getElementById("minutes").innerHTML + ":" + document.getElementById("seconds").innerHTML + " minutes. </center>";
+           $("#myModal").modal('show');  
         }
 	}           
     
 }
-
-/*
-
- if(CardArray[currntclicked].back != CardArray[currntclicked].front)
-                {
-                    if(CardArray[lastclicked].back != CardArray[lastclicked].front)
-                    {
-
-                    }
-                }
-
-
-$('.myjsclass').click(function()
-    {
-        var clickedID = this.id;
-        alert('The id of the element you clicked: ' + this.id);
-    });
-*/
