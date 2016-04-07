@@ -24,13 +24,12 @@
 <body>
     <center> 
         <div id="myscoreboard"></div>
-        <div class = "maxwidth img-shadow w3-container w3-center w3-animate-opacity" id = "Game">
-           <img src="images/MEMORY-GAME-900-Logo-alpha.png" id = "Gamei"/>         
-        </div>
-
-        <div class="clear"></div>
-        <button class="btn btn-danger btn-lg" id='reset'>RESET GAME</button>
-        <button class="btn btn-success btn-lg" id='start'>START GAME</button>
+            <div class = "maxwidth img-shadow w3-container w3-center w3-animate-opacity" id = "Game">
+                <img src="images/MEMORY-GAME-900-Logo-alpha.png" id = "Gamei"/> 
+                <button class="btn btn-success btn-lg automargin" id='start'>START GAME</button>
+            </div>
+            <div class="automargin" id = "resetdiv"></div>
+        <div class="clear"></div>        
     </center>
     
     <!-- Modal -->
@@ -41,13 +40,13 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">WINNER</h4>
+            <h4 class="modal-title">YAH You WON!!!</h4>
           </div>
           <div class="modal-body" id="win">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button class="btn btn-danger btn-lg" id='reset'>START NEW GAME</button>
+              <button type="button" class="btn btn-default btn-lg f_left" data-dismiss="modal" id = "reload">HOME</button>
+              <button class="btn btn-success btn-lg f_right" id='dorestart'>START NEW GAME</button>
           </div>
         </div>
 

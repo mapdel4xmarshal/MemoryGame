@@ -8,7 +8,7 @@ html {
 body {
     margin: 0 auto; 
     padding: 2em 2em 4em;
-    max-width: 80%;
+    max-width: 98%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5em;
@@ -19,7 +19,7 @@ body {
 }
 
 .maxwidth{
-    width : 100%;
+    width : 98%;
     text-align: center; 
 }
 
@@ -51,48 +51,36 @@ body {
     height:50%;
 }
 
+#winz{
+   width:90%;
+   height:43%; 
+    max-width: 422px;
+}
 
+.f_left
+{
+    float: left;
+}
+
+.f_right
+{
+    float: right;
+}
+
+.automargin
+{
+    margin: 1%;
+}
 //--------------------------------------------
-
-
-body {
-	background: url('img/field1.jpg');
-	background-size: 100%;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
 
 
 .displayed-scores {
 	text-align: center;
 }
 
-.our-name, .their-name {
-	width: 60%;
-	margin: 10px auto;
-	cursor: pointer;
-}
-
 .team-score {
-	width: 50%;
+	width: 45%;
 	float: left;
-}
-
-.scoreboard-back {
-	background: #333;
-	/* Fallback for web browsers that doesn't support RGBa */
-	background: rgb(0, 0, 0);
-	/* RGBa with 0.6 opacity */
-	background: rgba(0, 0, 0, 0.9);
-	filtesr:alpha(opacity=90); /* For IE8 and earlier */
-	//margin: 0 5% 5% 5%;
-	color: #fff;
 }
 
 .round {
@@ -102,7 +90,7 @@ a:hover {
 }
 
 .displayed-score {
-	width: 100%;
+	width: 80%;
 	margin: 0 auto;
 	background: #000;
 	font-weight: 800;
@@ -112,8 +100,6 @@ a:hover {
 	transform-origin: 0% 100%;
 	white-space: nowrap;
 }
-
-
 
 
 .text-align-right {

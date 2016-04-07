@@ -5,6 +5,8 @@ function Populate(i,back_val, front_val, position_val) {
     CardArray[i] = new Card(back_val, front_val, position_val);
 }
 
+var timerid;
+
 function Timer()
 {    
     this.initTimer = function()
@@ -22,7 +24,7 @@ function Timer()
         var minutesLabel = document.getElementById("minutes");
         var secondsLabel = document.getElementById("seconds");
         var totalSeconds = 0;
-        setInterval(setTime, 1000);
+        timerid = setInterval(setTime, 1000);
 
         function setTime()
         {
@@ -93,6 +95,7 @@ Game.prototype.Reset = function(){
             document.getElementById("Game").innerHTML = document.getElementById("Game").innerHTML + 
                 ("<div class=\"myjsclass\" id=\"myimgstyle-" + CardArray[i].position + "\"><img src=\"" + CardArray[i].back + "\" alt=\"Card\" class=\"myimgstyle   w3-center w3-animate-opacity\"  id=\"myimgstyle-" + CardArray[i].position + "\"></div>")
         }
+    document.getElementById("resetdiv").innerHTML = "<button class=\"btn btn-danger\" id=\'reset\'>RESTART GAME</button>";
 }
     
 Game.prototype.Start = function(){      
@@ -153,10 +156,25 @@ window.onclick = function ()
     var e = window.event;
     e = e.target || e.srcElement;
     
-    document.getElementById('reset').onclick = function()
+    document.getElementById('dorestart').onclick = function()
 	{	 
+        $("#myModal").modal('hide');  
         gamez.Reset();
-       // gamez.Init();
+        clearInterval(timerid);
+        timer.initTimer();
+        timer.doUpdateTimer();
+        revealed = 0;
+        gamez.moves = 0;
+	}
+    
+    if(e.id === 'reset')
+	{	 
+        gamez.Reset();  
+        clearInterval(timerid);
+        timer.initTimer();
+        timer.doUpdateTimer();
+        revealed = 0;
+        gamez.moves = 0;
 	}
     
   if(e.id === 'start')
@@ -169,6 +187,10 @@ window.onclick = function ()
         audio.play();
 	}    
     
+  if(e.id === 'reload')
+      {
+          location.reload();
+      }
     
   if(document.getElementById(e.id).className === 'myjsclass')
 	{   
@@ -203,7 +225,7 @@ window.onclick = function ()
                             else
                             {
                                 revealed++;
-                                flip.play();                                
+                                flip.play();                              
                             }
                     }
                     
@@ -211,8 +233,9 @@ window.onclick = function ()
           }
         if(revealed == 6)
         {
+           clearInterval(timerid);    
            gamewin.play();            
-           document.getElementById("win").innerHTML = "<center><img src=\"images/winner.png\"> <br>CONGRATULATIONS!!! You won the game with " + gamez.moves + " moves in " + document.getElementById("minutes").innerHTML + ":" + document.getElementById("seconds").innerHTML + " minutes. </center>";
+           document.getElementById("win").innerHTML = "<center><img src=\"images/winner.png\" id=\"winz\"> <br><h1>You won the game with " + gamez.moves + " moves in " + document.getElementById("minutes").innerHTML + ":" + document.getElementById("seconds").innerHTML + " minutes. </h1></center>";
            $("#myModal").modal('show');  
         }
 	}           
